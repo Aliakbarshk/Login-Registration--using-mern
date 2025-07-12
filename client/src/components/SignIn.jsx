@@ -1,18 +1,30 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import axios from 'axios';
 
 const SignIn = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  console.log(name, email, password);
+  const handleSubmit = (e) => {
+
+    console.log(`Name: ${name}, Email: ${email}, Password: ${password}`);
+
+    e.preventDefault()
+    axios.post('',{name,email,password})
+    .then(result => console.log(result))
+    .catch(result => console.log("error"))
+  }
+
+
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
       <form
         className="p-4 bg-white rounded shadow-sm"
         style={{ width: "320px" }}
+        onSubmit={handleSubmit}
       >
         <h3 className="text-center mb-4">Sign Up</h3>
 
@@ -49,7 +61,7 @@ const SignIn = () => {
           />
         </div>
 
-        <button type="submit" className="btn btn-primary w-100">
+        <button type="submit" className="btn btn-primary w-100" >
           Register
         </button>
 
