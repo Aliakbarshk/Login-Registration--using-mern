@@ -1,26 +1,33 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import axios from 'axios';
-import {useNavigate} from "react-router-dom"
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const SignIn = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate()
+  const [Broute, setBroute] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
+    if (!name || !email || !password) {
+      alert("Please fill all the fields");
+      return;
+    }
 
-    // console.log(`Name: ${name}, Email: ${email}, Password: ${password}`);
+    console.log("😏");
 
-    e.preventDefault()
+    // console.log(Name: ${name}, Email: ${email}, Password: ${password});
+
+    e.preventDefault();
     axios
       .post("http://localhost:5000/register", { name, email, password })
       .then((result) => console.log(result))
       .catch((result) => console.log("error"));
-  }
-
-
+      navigate("/dashboard");
+  };
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
@@ -64,7 +71,7 @@ const SignIn = () => {
           />
         </div>
 
-        <button type="submit" className="btn btn-primary w-100" >
+        <button type="submit" className="btn btn-primary w-100">
           Register
         </button>
 

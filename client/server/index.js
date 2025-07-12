@@ -46,10 +46,34 @@ mongoose.connect(`${process.env.MONGODB_URI}${DBNAME}`)
 
 
 app.post('/register' , (req , res) => {
+
     EmployeeModel.create(req.body)
-    .then(employees => res.json(employees))
+    .then(employees => res.json(employees)
+         )
     .catch(err => res.json(err))
+    
+
 })
+
+
+
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body; // 1️⃣  front‑se aaya data
+
+  try {
+    const user = await EmployeeModel.findOne({ email }); // 2️⃣  DB query
+
+    if (!user) return res.json("User not found⚠️"); // 3️⃣  email hi galat
+
+    if (user.password !== password)
+      // 4️⃣  pwd match check
+      return res.json("Password incorrect");
+
+    res.json("Success"); // 5️⃣  sab sahi
+  } catch (err) {
+    res.status(500).json("Server error"); // 6️⃣  safety
+  }
+});
 
 
 
