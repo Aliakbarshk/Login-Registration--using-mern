@@ -10,7 +10,9 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [Broute, setBroute] = useState("");
   const navigate = useNavigate();
-
+  // alert(
+  //   "Note: Don't enter your real email or password. This is just a practice project."
+  // );
   const handleSubmit = (e) => {
     if (!name || !email || !password) {
       alert("Please fill all the fields");
@@ -23,7 +25,11 @@ const SignIn = () => {
 
     e.preventDefault();
     axios
-      .post("http://localhost:5000/register", { name, email, password })
+      .post("https://sign-in-login-backend.onrender.com/register", {
+        name,
+        email,
+        password,
+      })
       .then((result) => console.log(result))
       .catch((result) => console.log("error"));
       navigate("/dashboard");

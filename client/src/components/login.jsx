@@ -12,10 +12,13 @@ const Login = () => {
     e.preventDefault();
 
     axios
-      .post("http://localhost:5000/login", { email, password })
+      .post("https://sign-in-login-backend.onrender.com/login", {
+        email,
+        password,
+      })
       .then((res) => {
         if (res.data === "Success") navigate("/dashboard"); // redirect
-        else alert(res.data);                               // error msg
+        else alert(res.data); // error msg
       })
       .catch(() => alert("Server error"));
   };
