@@ -9,12 +9,13 @@ const SignIn = () => {
 
   const handleSubmit = (e) => {
 
-    console.log(`Name: ${name}, Email: ${email}, Password: ${password}`);
+    // console.log(`Name: ${name}, Email: ${email}, Password: ${password}`);
 
     e.preventDefault()
-    axios.post('',{name,email,password})
-    .then(result => console.log(result))
-    .catch(result => console.log("error"))
+    axios
+      .post("http://localhost:5000/register", { name, email, password })
+      .then((result) => console.log(result))
+      .catch((result) => console.log("error"));
   }
 
 
